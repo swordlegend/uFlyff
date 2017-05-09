@@ -87,7 +87,12 @@ namespace uFlyff.Editor.AssetProcessing
                     if (asset.EndsWith(".o3d"))
                     {
                         o3d o3dFile = new o3d(asset);
+                        fileName = fileName.Replace(".o3d", string.Empty);
                         Mesh mesh = o3dFile.GetAssetObject();
+                        mesh.name = fileName;
+                        AssetDatabase.DeleteAsset(o3dOutputPath + fileName + ".asset");
+                        AssetDatabase.CreateAsset(mesh, o3dOutputPath + fileName + ".asset");
+
                     }
                     else if (asset.EndsWith(".ani"))
                     {

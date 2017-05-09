@@ -13,12 +13,14 @@ namespace uFlyff.Editor.AssetProcessing
     /// <typeparam name="T">The type of Unity object this format will be converted to</typeparam>
     internal abstract class FlyffFileFormat<T> where T : UnityEngine.Object
     {
-        private string assetPath;
+        protected string assetPath;
+        protected bool wasLoaded = false;
 
         public FlyffFileFormat(string filePath)
         {
             this.assetPath = filePath;
             Load(filePath);
+            
         }
 
         public abstract void Load(string filePath);
@@ -171,7 +173,37 @@ namespace uFlyff.Editor.AssetProcessing
 
         public override Mesh GetAssetObject()
         {
-            throw new NotImplementedException();
+            Mesh mesh = new Mesh();
+            if (this.wasLoaded)
+            {
+                LODMesh lod = lods[0];
+                List<Vector3> verts = new List<Vector3>();
+                List<Vector3> norms = new List<Vector3>();
+                List<Vector2> uvs = new List<Vector2>();
+
+                for(int i = 0; i < lod.verticies.Length; i++)
+                {
+                    verts.Add(lod.verticies[i].position);
+                    uvs.Add(lod.verticies[i].UV);
+                    norms.Add(lod.verticies[i].normal);
+                }
+
+                mesh.SetVertices(verts);
+                mesh.SetNormals(norms);
+                mesh.uv = uvs.ToArray();
+
+                int numTris = lod.indexCount;
+                int[] triangles = new int[numTris];
+                for(int j = 0; j < numTris; j++)
+                {
+                    triangles[j] = (int)lod.faces[j];
+                }
+
+                mesh.SetTriangles(triangles, 0);
+                mesh.RecalculateTangents();
+                mesh.RecalculateBounds();
+            }
+            return mesh;
         }
 
         public override void Load(string filePath)
@@ -331,6 +363,7 @@ namespace uFlyff.Editor.AssetProcessing
             }
 
             reader.Close();
+            this.wasLoaded = true;
         }
 
         public override void Save(string filePath)
