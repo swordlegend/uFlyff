@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uFlyff", "uFlyff.csproj", "{1DAF58E3-7E3D-2239-175C-E2E729742B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uFlyff.Editor", "uFlyff.Editor.csproj", "{1AD9E383-73F1-DAAE-79A6-492B196A4FB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DAF58E3-7E3D-2239-175C-E2E729742B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DAF58E3-7E3D-2239-175C-E2E729742B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DAF58E3-7E3D-2239-175C-E2E729742B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DAF58E3-7E3D-2239-175C-E2E729742B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AD9E383-73F1-DAAE-79A6-492B196A4FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AD9E383-73F1-DAAE-79A6-492B196A4FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AD9E383-73F1-DAAE-79A6-492B196A4FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AD9E383-73F1-DAAE-79A6-492B196A4FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
