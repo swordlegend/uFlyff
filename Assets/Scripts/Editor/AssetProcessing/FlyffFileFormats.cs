@@ -180,17 +180,31 @@ namespace uFlyff.Editor.AssetProcessing
                 List<Vector3> verts = new List<Vector3>();
                 List<Vector3> norms = new List<Vector3>();
                 List<Vector2> uvs = new List<Vector2>();
+                List<BoneWeight> weights = new List<BoneWeight>();
 
                 for(int i = 0; i < lod.verticies.Length; i++)
                 {
                     verts.Add(lod.verticies[i].position);
                     uvs.Add(lod.verticies[i].UV);
                     norms.Add(lod.verticies[i].normal);
+
+                    if (lod.hasBones == 1)
+                    {
+                        BoneWeight weight = new BoneWeight();
+                        weight.boneIndex0 = lod.verticies[i].bone1;
+                        weight.boneIndex1 = lod.verticies[i].bone2;
+                        weight.weight0 = lod.verticies[i].weight1;
+                        weight.weight1 = lod.verticies[i].weight2;
+                        weights.Add(weight);
+                    }
                 }
 
                 mesh.SetVertices(verts);
                 mesh.SetNormals(norms);
                 mesh.uv = uvs.ToArray();
+
+                if (lod.hasBones == 1)
+                    mesh.boneWeights = weights.ToArray();
 
                 int numTris = lod.indexCount;
                 int[] triangles = new int[numTris];
