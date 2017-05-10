@@ -214,6 +214,8 @@ namespace uFlyff.Editor.AssetProcessing
                 }
 
                 mesh.SetTriangles(triangles, 0);
+                //mesh.RecalculateNormals();
+
                 mesh.RecalculateTangents();
                 mesh.RecalculateBounds();
             }
@@ -313,6 +315,9 @@ namespace uFlyff.Editor.AssetProcessing
                     }
                     vert.normal = reader.ReadVector3();
                     vert.UV = reader.ReadVector2();
+
+                    // Translate from DirectX to OpenGL coordinates
+                    vert.UV = new Vector2(vert.UV.x, 1 - vert.UV.y);
                 }
 
                 // faces = indicies
